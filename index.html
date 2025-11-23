@@ -340,15 +340,7 @@
             </div>
         </div>
 
-        <div id="page-ujian" class="page">
-            <div class="sub-header"><div class="btn-back" onclick="goToPage('page-home')"><i class="fas fa-arrow-left"></i></div><h3>Ujian CBT</h3></div>
-            <div style="padding:1.5rem; text-align:center;">
-                <div style="background:white; padding:2rem; border-radius:16px;">
-                    <h2>Penilaian Harian</h2><p style="color:#666; margin-bottom:1rem;">Bahasa Inggris</p>
-                    <div id="ujian-area"></div>
-                </div>
-            </div>
-        </div>
+    
 
         <div id="page-rapor" class="page">
             <div class="sub-header"><div class="btn-back" onclick="goToPage('page-home')"><i class="fas fa-arrow-left"></i></div><h3>Rapor Semester</h3></div>
@@ -466,9 +458,7 @@
             'futsal': { title: "Juara 1 Futsal", cat: "Prestasi", img: "https://images.unsplash.com/photo-1575361204480-aadea25e6e68?w=600", content: "Selamat kepada tim Futsal MAN 6!" }
         };
 
-        let currentSubject = '';
-        const STATUS_UJIAN = 'OFF'; // Ganti ON untuk mengaktifkan
-
+    
         // NAVIGASI UTAMA
         function goToPage(id) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
@@ -533,10 +523,6 @@
             else { overlay.classList.remove('active'); popup.classList.remove('active'); }
         }
 
-        // INIT UJIAN
-        const ujianArea = document.getElementById('ujian-area');
-        if(STATUS_UJIAN === 'ON') ujianArea.innerHTML = '<button onclick="window.location.href='ujian.html'" style="width:100%; padding:1rem; background:blue; color:white; border:none; border-radius:10px;">MULAI UJIAN</button>';
-        else ujianArea.innerHTML = '<div style="background:#fee2e2; color:red; padding:1rem; border-radius:10px; font-weight:bold;">Ujian Belum Dimulai</div>';
 
     </script>
     
@@ -658,6 +644,7 @@
     </script>
 </body>
 </html>
+
 
 
 
