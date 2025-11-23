@@ -319,8 +319,7 @@ const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz-KYpfaeSN0gVBTKlS-
         // --- CORE EXAM LOGIC ---
         function startExam() {
             if(!userData.mapel || !userData.nama) { alert("Data belum lengkap!"); return; }
-            
-            document.documentElement.requestFullscreen().then(() => {
+        (() => {
                 activeQuestions = questionsDB[userData.mapelCode] || questionsDB.informatika;
                 userAnswers = new Array(activeQuestions.length).fill(null);
                 
@@ -333,7 +332,7 @@ const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz-KYpfaeSN0gVBTKlS-
                 isExamActive = true;
                 activateSecurity();
 
-            }).catch(() => alert("Wajib Fullscreen! Izinkan browser."));
+            })
         }
 
         function renderQuestion() {
@@ -456,6 +455,7 @@ document.onkeydown = function(e) {
     </script>
 </body>
 </html>
+
 
 
 
