@@ -535,7 +535,7 @@
 
         // INIT UJIAN
         const ujianArea = document.getElementById('ujian-area');
-        if(STATUS_UJIAN === 'ON') ujianArea.innerHTML = '<button style="width:100%; padding:1rem; background:blue; color:white; border:none; border-radius:10px;">MULAI UJIAN</button>';
+        if(STATUS_UJIAN === 'ON') ujianArea.innerHTML = '<button onclick="window.location.href='ujian.html'" style="width:100%; padding:1rem; background:blue; color:white; border:none; border-radius:10px;">MULAI UJIAN</button>';
         else ujianArea.innerHTML = '<div style="background:#fee2e2; color:red; padding:1rem; border-radius:10px; font-weight:bold;">Ujian Belum Dimulai</div>';
 
     </script>
@@ -658,5 +658,6 @@
     </script>
 </body>
 </html>
+
 
 
