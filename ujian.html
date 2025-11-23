@@ -444,9 +444,17 @@ const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz-KYpfaeSN0gVBTKlS-
                 if(--timer < 0) { clearInterval(timerInterval); processSubmission(); }
             }, 1000);
         }
-
-        document.onkeydown = function(e) { if(e.keyCode == 123) return false; }
+window.addEventListener('keyup', (e) => {
+                if(isExamActive && e.key === 'PrintScreen') {
+                    lockExam("Terdeteksi Screenshot");
+                }
+            });
+document.onkeydown = function(e) { 
+            if(e.keyCode == 123) return false; 
+            if(e.ctrlKey && e.keyCode == 'P'.charCodeAt(0)) return false; 
+        }
     </script>
 </body>
 </html>
+
 
