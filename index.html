@@ -10,7 +10,62 @@
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+<style>
+    /* Overlay Gelap */
+    .redirect-overlay {
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+        background: rgba(0, 0, 0, 0.6);
+        z-index: 9999; /* Paling atas */
+        display: none; /* Hidden by default */
+        justify-content: center; align-items: center;
+        backdrop-filter: blur(4px); /* Efek blur modern */
+    }
 
+    /* Kotak Popup */
+    .redirect-card {
+        background: #ffffff;
+        width: 90%; max-width: 350px;
+        padding: 30px;
+        border-radius: 24px;
+        text-align: center;
+        box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+        animation: popUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        font-family: 'Inter', sans-serif;
+    }
+
+    /* Ikon Globe */
+    .redirect-icon {
+        width: 70px; height: 70px;
+        background: #EEF2FF; color: #4F46E5;
+        border-radius: 50%;
+        display: flex; justify-content: center; align-items: center;
+        font-size: 30px; margin: 0 auto 20px auto;
+    }
+
+    /* Teks */
+    .redirect-card h3 { margin: 0 0 10px 0; color: #1F2937; font-size: 1.2rem; }
+    .redirect-card p { color: #6B7280; margin-bottom: 25px; font-size: 0.95rem; line-height: 1.5; }
+
+    /* Tombol Group */
+    .btn-group { display: flex; gap: 10px; }
+    
+    .btn-redirect {
+        flex: 1; padding: 12px; border-radius: 12px;
+        border: none; font-weight: 600; cursor: pointer;
+        font-size: 0.9rem; transition: 0.2s;
+    }
+    
+    .btn-cancel { background: #F3F4F6; color: #374151; }
+    .btn-go { background: #4F46E5; color: white; }
+    
+    .btn-go:hover { background: #4338ca; }
+    .btn-cancel:hover { background: #E5E7EB; }
+
+    @keyframes popUp {
+        0% { transform: scale(0.8); opacity: 0; }
+        100% { transform: scale(1); opacity: 1; }
+    }
+</style>
     <style>
         /* --- VARIABLES & RESET --- */
         :root {
@@ -185,7 +240,20 @@
     </style>
 </head>
 <body>
-
+<div id="redirectModal" class="redirect-overlay">
+    <div class="redirect-card">
+        <div class="redirect-icon">
+            🌐
+        </div>
+        <h3>Buka Halaman Ujian?</h3>
+        <p>Anda akan diarahkan keluar dari aplikasi menuju halaman website ujian.</p>
+        
+        <div class="btn-group">
+            <button class="btn-redirect btn-cancel" onclick="closeRedirectModal()">Batal</button>
+            <button class="btn-redirect btn-go" onclick="goToExam()">Lanjut</button>
+        </div>
+    </div>
+</div>
     <div class="app-container">
         
         <div id="page-home" class="page active">
@@ -229,9 +297,12 @@
                 <div class="menu-item" onclick="goToPage('page-tugas')">
                     <div class="icon-box bg-purple"><i class="fas fa-clipboard-check"></i></div><span class="menu-text">Tugas</span>
                 </div>
-                <div class="menu-item" onclick="window.location.href='ujian.html'">
-                    <div class="icon-box bg-orange"><i class="fas fa-laptop-code"></i></div><span class="menu-text">Ujian</span>
-                </div>
+<div class="menu-item" onclick="openRedirectModal()">
+    <div class="icon-box bg-orange">
+        <i class="fas fa-laptop-code"></i>
+    </div>
+    <span class="menu-text">Ujian</span>
+</div>
                 <div class="menu-item" onclick="goToPage('page-jadwal')">
                     <div class="icon-box bg-teal"><i class="fas fa-calendar-alt"></i></div><span class="menu-text">Jadwal</span>
                 </div>
@@ -642,8 +713,36 @@
             else { ov.classList.remove('active'); p.classList.remove('active'); }
         }
     </script>
+    <script>
+    // URL TUJUAN (Pastikan pakai https://)
+    const TARGET_URL = "https://reygusti.github.io/edulabx3.github.io/ujian.html";
+
+    function openRedirectModal() {
+        document.getElementById('redirectModal').style.display = 'flex';
+    }
+
+    function closeRedirectModal() {
+        document.getElementById('redirectModal').style.display = 'none';
+    }
+
+    function goToExam() {
+        closeRedirectModal();
+        // '_blank' akan memaksa membuka di Browser (Chrome/Safari)
+        // alih-alih di dalam WebView aplikasi
+        window.open(TARGET_URL, '_blank');
+    }
+    
+    // Tutup jika klik di luar kotak
+    window.onclick = function(event) {
+        const modal = document.getElementById('redirectModal');
+        if (event.target == modal) {
+            closeRedirectModal();
+        }
+    }
+</script>
 </body>
 </html>
+
 
 
 
